@@ -5,7 +5,7 @@ stages:
   - functional test
   - push github
 
-test build:
-  stage: build
+push github:
+  stage: push github
   script:
-    - echo test
+    - docker run -v -e REPOS=github -e BRANCH=master affog/git
