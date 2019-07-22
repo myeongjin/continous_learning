@@ -1,0 +1,11 @@
+stages:
+  - build
+  - unit test
+  - integration test
+  - functional test
+  - push github
+
+push github:
+  stage: push github
+  script:
+    - docker run -v -e REPOS=gitlab -e BRANCH=master affog/git
