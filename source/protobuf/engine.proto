@@ -12,5 +12,3 @@ message ID {
 message Image {
     ID id = 1;
 }
-
-message Empty {}
