@@ -33,5 +33,17 @@ class EngineServicerTestCase(unittest.TestCase):
             self.assertNotEqual(id_, engine_pb2.ID())
             self.assertEqual(stub.GetTrainImage(id_), engine_pb2.Image(id=id_))
 
+    def test_train_label(self):
+        id_ = engine_pb2.ID(bytes=uuid.uuid4().bytes)
+        label = engine_pb2.Label(id=id_)
+        with grpc.insecure_channel('localhost:50051') as channel:
+            stub = engine_pb2_grpc.EngineStub(channel)
+            self.assertEqual(stub.GetTrainLabel(id_), engine_pb2.Label())
+            self.assertEqual(stub.PutTrainLabel(label), id_)
+            self.assertEqual(stub.GetTrainLabel(id_), label)
+            id_ = stub.PutTrainLabel(engine_pb2.Label())
+            self.assertNotEqual(id_, engine_pb2.ID())
+            self.assertEqual(stub.GetTrainLabel(id_), engine_pb2.Label(id=id_))
+
 if __name__ == '__main__':
     unittest.main()
