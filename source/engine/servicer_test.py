@@ -1,5 +1,6 @@
 import unittest
 from concurrent import futures
+import uuid
 
 import grpc
 
@@ -25,9 +26,9 @@ class EngineServicerTestCase(unittest.TestCase):
         image = engine_pb2.Image(id=id_)
         with grpc.insecure_channel('localhost:50051') as channel:
             stub = engine_pb2_grpc.EngineStub(channel)
-            self.assertEqual(stub.GetTrainImage(id_, engine_pb2.Image())
+            self.assertEqual(stub.GetTrainImage(id_), engine_pb2.Image())
             self.assertEqual(stub.PutTrainImage(image), id_)
-            self.assertEqual(stub.GetTrainImage(engine_pb2.ID(id=id_)), image))
+            self.assertEqual(stub.GetTrainImage(engine_pb2.ID(id=id_)), image)
             id_ = stub.PutTrainImage(engine_pb2.Image())
             self.assertNotEqual(id_, engine_pb2.ID())
             self.assertEqual(stub.GetTrainImage(engine_pb2.ID(id=id_)), engine_pb2.Image(id=id_))
