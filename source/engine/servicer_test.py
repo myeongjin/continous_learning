@@ -20,10 +20,12 @@ class EngineServicerTestCase(unittest.TestCase):
     def tearDown(self):
         self.server.stop(0)
 
-    def test(self):
+    def test_train_image(self):
         with grpc.insecure_channel('localhost:50051') as channel:
             stub = engine_pb2_grpc.EngineStub(channel)
-            stub.PutTrainData(engine_pb2.Data())
+            stub.GetTrainData(engine_pb2.ID())
+            stub.PutTrainData(engine_pb2.Image())
+            stub.GetTrainData(engine_pb2.ID())
 
 if __name__ == '__main__':
     unittest.main()

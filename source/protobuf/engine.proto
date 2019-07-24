@@ -1,9 +1,14 @@
 syntax = "proto3";
 
 service Engine {
-    rpc PutTrainData(Image) returns (Empty) {}
+    rpc PutTrainImage(Image) returns (ID) {}
+    rpc GetTrainImage(ID) returns (Image) {}
 }
 
-message Image {}
+message ID {}
+
+message Image {
+    ID id = 1;
+}
 
 message Empty {}

@@ -9,5 +9,8 @@ import engine_pb2_grpc #pylint: disable=import-error
 
 class EngineServicer(engine_pb2_grpc.EngineServicer):
 
-    def PutTrainData(self, request, context):
-        return engine_pb2.Empty()
+    def PutTrainImage(self, request, context):
+        return engine_pb2.ID()
+
+    def GetTrainImage(self, request, context):
+        return engine_pb2.Image()
