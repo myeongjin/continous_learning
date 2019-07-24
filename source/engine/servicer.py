@@ -28,4 +28,4 @@ class EngineServicer(engine_pb2_grpc.EngineServicer):
         if image == None:
             return engine_pb2.Image()
         
-        return image
+        return engine_pb2.Image.FromString(image)
