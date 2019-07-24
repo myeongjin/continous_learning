@@ -21,11 +21,16 @@ class EngineServicerTestCase(unittest.TestCase):
         self.server.stop(0)
 
     def test_train_image(self):
+        id_ = engine_pb2.ID(bytes=uuid.uuid4().bytes))
+        image = engine_pb2.Image(id=id_)
         with grpc.insecure_channel('localhost:50051') as channel:
             stub = engine_pb2_grpc.EngineStub(channel)
-            stub.GetTrainImage(engine_pb2.ID())
-            stub.PutTrainImage(engine_pb2.Image())
-            stub.GetTrainImage(engine_pb2.ID())
+            self.assertEqual(stub.GetTrainImage(id_, engine_pb2.Image())
+            self.assertEqual(stub.PutTrainImage(image), id_)
+            self.assertEqual(stub.GetTrainImage(engine_pb2.ID(id=id_)), image))
+            id_ = stub.PutTrainImage(engine_pb2.Image())
+            self.assertNotEqual(id_, engine_pb2.ID())
+            self.assertEqual(stub.GetTrainImage(engine_pb2.ID(id=id_)), engine_pb2.Image(id=id_))
 
 if __name__ == '__main__':
     unittest.main()
