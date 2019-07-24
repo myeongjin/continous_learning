@@ -5,7 +5,7 @@ stages:
   - functional test
   - push github
 
-test build:
+build engine:
   stage: build
   script:
-    - echo test
+    - docker build -t continous_learning/engine:nightly -f docker/engine.Dockerfile source

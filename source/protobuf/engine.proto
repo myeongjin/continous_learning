@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+service Engine {
+    rpc PutTrainImage(Image) returns (Empty) {}
+}
+
+message Dataset {
+    Image image = 1;
+}
+
+message Image {
+    oneof image {
+        string path = 1;
+        bytes encoded = 2;
+    }
+}
