@@ -28,10 +28,10 @@ class EngineServicerTestCase(unittest.TestCase):
             stub = engine_pb2_grpc.EngineStub(channel)
             self.assertEqual(stub.GetTrainImage(id_), engine_pb2.Image())
             self.assertEqual(stub.PutTrainImage(image), id_)
-            self.assertEqual(stub.GetTrainImage(engine_pb2.ID(id=id_)), image)
+            self.assertEqual(stub.GetTrainImage(id_), image)
             id_ = stub.PutTrainImage(engine_pb2.Image())
             self.assertNotEqual(id_, engine_pb2.ID())
-            self.assertEqual(stub.GetTrainImage(engine_pb2.ID(id=id_)), engine_pb2.Image(id=id_))
+            self.assertEqual(stub.GetTrainImage(id_), engine_pb2.Image(id=id_))
 
 if __name__ == '__main__':
     unittest.main()
