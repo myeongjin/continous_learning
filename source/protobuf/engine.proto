@@ -5,7 +5,9 @@ service Engine {
     rpc GetTrainImage(ID) returns (Image) {}
 }
 
-message ID {}
+message ID {
+    bytes bytes = 1;
+}
 
 message Image {
     ID id = 1;
