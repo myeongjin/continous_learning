@@ -31,7 +31,7 @@ class EngineServicer(engine_pb2_grpc.EngineServicer):
         
         return engine_pb2.Image.FromString(image)
 
-    def PutTrainLabel(self, Label, context):
+    def PutTrainLabel(self, label, context):
         if label.id.bytes == b'':
             label.id.bytes = uuid.uuid4().bytes
 
