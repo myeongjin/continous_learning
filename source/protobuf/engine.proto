@@ -14,3 +14,5 @@ message Image {
         bytes encoded = 2;
     }
 }
+
+message Empty {}
