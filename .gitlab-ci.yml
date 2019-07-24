@@ -13,4 +13,4 @@ build engine:
 test engine:
   stage: unit test
   script:
-    - docker run --rm continous_learning/engine:nightly python engine_test.py source
+    - docker run --rm continous_learning/engine:nightly python engine/servicer_test.py source

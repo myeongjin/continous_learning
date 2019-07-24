@@ -6,7 +6,7 @@ import grpc
 import engine_pb2 #pylint: disable=import-error
 import engine_pb2_grpc #pylint: disable=import-error
 
-from engine import EngineServicer
+from servicer import EngineServicer
 
 class EngineServicerTestCase(unittest.TestCase):
 
