@@ -3,6 +3,8 @@ syntax = "proto3";
 service Engine {
     rpc PutTrainImage(Image) returns (ID) {}
     rpc GetTrainImage(ID) returns (Image) {}
+    rpc PutTrainLabel(Label) returns (ID) {}
+    rpc GetTrainLabel(ID) returns (Label) {}
 }
 
 message ID {
@@ -10,5 +12,9 @@ message ID {
 }
 
 message Image {
+    ID id = 1;
+}
+
+message Label {
     ID id = 1;
 }
