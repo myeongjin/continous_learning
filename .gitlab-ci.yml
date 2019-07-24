@@ -12,5 +12,9 @@ build engine:
 
 test engine:
   stage: unit test
+  before_script:
+    - docker run --rm -d --name redis -p 6379:6379 redis:latest
   script:
     - docker run --rm continous_learning/engine:nightly python engine/servicer_test.py
+  after_script:
+    - docker kill redis
