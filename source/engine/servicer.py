@@ -41,6 +41,6 @@ class EngineServicer(engine_pb2_grpc.EngineServicer):
     def GetTrainLabel(self, id_, context):
         label = self.train_labels.get(id_.bytes)
         if label == None:
-            return engine_pb2.label()
+            return engine_pb2.Label()
         
         return engine_pb2.Label.FromString(label)
