@@ -9,3 +9,8 @@ build engine:
   stage: build
   script:
     - docker build -t continous_learning/engine:nightly -f docker/engine.Dockerfile source
+
+test engine:
+  stage: unit test
+  script:
+    - docker run --rm continous_learning/engine:nightly python engine_test.py source
