@@ -44,3 +44,6 @@ class EngineServicer(engine_pb2_grpc.EngineServicer):
             return engine_pb2.Label()
         
         return engine_pb2.Label.FromString(label)
+
+    def GetTrainLogits(self, id_, context):
+        return engine_pb2.Logits()

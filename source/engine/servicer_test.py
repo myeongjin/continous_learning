@@ -45,5 +45,10 @@ class EngineServicerTestCase(unittest.TestCase):
             self.assertNotEqual(id_, engine_pb2.ID())
             self.assertEqual(stub.GetTrainLabel(id_), engine_pb2.Label(id=id_))
 
+    def test_train_logits(self):
+        with grpc.insecure_channel('localhost:50051') as channel:
+            stub = engine_pb2_grpc.EngineStub(channel)
+            stub.GetTrainLogits(engine_pb2.ID())
+
 if __name__ == '__main__':
     unittest.main()

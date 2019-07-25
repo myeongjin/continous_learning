@@ -5,6 +5,7 @@ service Engine {
     rpc GetTrainImage(ID) returns (Image) {}
     rpc PutTrainLabel(Label) returns (ID) {}
     rpc GetTrainLabel(ID) returns (Label) {}
+    rpc GetTrainLogits(ID) returns (Logits) {}
 }
 
 message ID {
@@ -17,4 +18,10 @@ message Image {
 
 message Label {
     ID id = 1;
+}
+
+message Logits {
+    ID id = 1;
+    repeated int32 indexes = 2;
+    repeated float logits = 3;
 }
