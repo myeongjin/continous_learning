@@ -8,6 +8,7 @@ import engine_pb2 #pylint: disable=import-error
 import engine_pb2_grpc #pylint: disable=import-error
 
 from servicer import EngineServicer
+from engine import Engine
 
 class EngineServicerTestCase(unittest.TestCase):
 
@@ -18,8 +19,12 @@ class EngineServicerTestCase(unittest.TestCase):
         self.server.add_insecure_port('[::]:50051')
         self.server.start()
 
+        self.engine = Engine()
+        self.engine.start()
+
     def tearDown(self):
         self.server.stop(0)
+        self.engine.stop()
 
     def test_train_image(self):
         id_ = engine_pb2.ID(bytes=uuid.uuid4().bytes)
