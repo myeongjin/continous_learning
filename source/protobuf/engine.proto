@@ -14,10 +14,12 @@ message ID {
 
 message Image {
     ID id = 1;
+    string path = 2;
 }
 
 message Label {
     ID id = 1;
+    repeated int32 label = 2;
 }
 
 message Logits {
