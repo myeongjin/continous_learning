@@ -1,7 +1,7 @@
 FROM tensorflow/tensorflow:1.14.0-py3
 
 RUN python -m pip install --upgrade pip
-RUN pip install grpcio grpcio-tools redis skimage
+RUN pip install grpcio grpcio-tools redis scikit-image
 
 WORKDIR /root
 
