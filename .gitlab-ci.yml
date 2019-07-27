@@ -15,6 +15,6 @@ test engine:
   before_script:
     - docker run --rm -d --name redis -p 6379:6379 redis:latest
   script:
-    - docker run --rm -e REDIS_HOST=10.0.0.6 -e REDIS_PORT=6379 continous_learning/engine:nightly -v D:/dataset/VOC2006:/mnt/VOC2006 python engine/servicer_test.py
+    - docker run --rm -e REDIS_HOST=10.0.0.6 -e REDIS_PORT=6379 -v D:/dataset/VOC2006:/mnt/VOC2006 continous_learning/engine:nightly python engine/servicer_test.py
   after_script:
     - docker kill redis
