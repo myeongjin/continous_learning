@@ -59,11 +59,11 @@ class EngineServicerTestCase(unittest.TestCase):
     def test_engine(self):
         with grpc.insecure_channel('localhost:50051') as channel:
             stub = engine_pb2_grpc.EngineStub(channel)
-            id_ = stub.PutTrainImage(engine_pb2.Image(path='/mntVOC2006/train/PNGImages/000004.png'))
+            id_ = stub.PutTrainImage(engine_pb2.Image(path='/mnt/VOC2006/train/PNGImages/000004.png'))
             stub.PutTrainLabel(engine_pb2.Label(id=id_, one_hot_label=[0]*1000))
-            id_ = stub.PutTrainImage(engine_pb2.Image(path='/mntVOC2006/train/PNGImages/000006.png'))
+            id_ = stub.PutTrainImage(engine_pb2.Image(path='/mnt/VOC2006/train/PNGImages/000006.png'))
             stub.PutTrainLabel(engine_pb2.Label(id=id_, one_hot_label=[0]*1000))
-            id_ = stub.PutTrainImage(engine_pb2.Image(path='/mntVOC2006/train/PNGImages/000008.png'))
+            id_ = stub.PutTrainImage(engine_pb2.Image(path='/mnt/VOC2006/train/PNGImages/000008.png'))
             stub.PutTrainLabel(engine_pb2.Label(id=id_, one_hot_label=[0]*1000))
             
             time.sleep(3)
