@@ -23,8 +23,7 @@ test mount:
   stage: build
   script:
     - ls /mnt
-    - ls /mnt/bin
-    - ls /mnt/d
-    - ls /mnt/d/dataset
-    - ls /mnt/d/dataset/VOC2006
-    - ls /mnt/d/dataset/VOC2006/train
+    - "ls /mnt/D:"
+    - "ls /mnt/D:/dataset"
+    - "ls /mnt/D:/dataset/VOC2006"
+    - "ls /mnt/D:/dataset/VOC2006/train"
