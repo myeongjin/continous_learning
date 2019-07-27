@@ -22,4 +22,4 @@ test engine:
 test mount:
   stage: unit test
   script:
-    - ls /mnt/D/dataset/VOC2006
+    - ls /mnt/D/dataset
