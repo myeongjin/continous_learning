@@ -6,7 +6,7 @@ import skimage
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow import backend as K
+from tensorflow import backend as K # pylint: disable=no-name-in-module
 
 import engine_pb2 # pylint: disable=import-error
 
