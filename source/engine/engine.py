@@ -33,7 +33,6 @@ class Engine:
                 import time
                 print(image)
                 print(label)
-                time.sleep(1)
 
     def start(self):
         self.should_continue = True
