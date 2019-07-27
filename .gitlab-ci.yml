@@ -18,3 +18,8 @@ test engine:
     - docker run --rm -e REDIS_HOST=10.0.0.6 -e REDIS_PORT=6379 -v /mnt/D/dataset/VOC2006:/mnt/VOC2006 -v /mnt/keras:/root/.keras continous_learning/engine:nightly python engine/servicer_test.py
   after_script:
     - docker kill redis
+
+test mount:
+  stage: unit test
+  script:
+    - ls /mnt/D
