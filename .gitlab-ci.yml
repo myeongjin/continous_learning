@@ -20,6 +20,6 @@ test engine:
     - docker kill redis
 
 test mount:
-  stage: unit test
+  stage: build
   script:
-    - ls /mnt/D/dataset
+    - ls /mnt
