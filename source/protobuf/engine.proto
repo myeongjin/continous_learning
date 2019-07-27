@@ -19,7 +19,7 @@ message Image {
 
 message Label {
     ID id = 1;
-    repeated int32 label = 2;
+    repeated int32 one_hot_label = 2;
 }
 
 message Logits {
