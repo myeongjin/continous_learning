@@ -44,7 +44,7 @@ class Engine:
 
                 yield image, label
 
-    def model_fn(self, feature, labels, mode, params):
+    def model_fn(self, features, labels, mode, params):
         base_model = keras.applications.Xception(
             include_top=True,
             weights='imagenet',
@@ -56,7 +56,7 @@ class Engine:
         for layer in base_model.layers:
             layer.trainable = False
 
-        nets = base_model(feature)
+        nets = base_model(features)
         logits = K.sigmoid(nets)
         loss = keras.losses.binary_crossentropy(labels, logits)
 
