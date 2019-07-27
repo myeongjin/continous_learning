@@ -9,7 +9,7 @@ import engine_pb2 # pylint: disable=import-error
 class Engine:
 
     def __init__(self):
-        self.should_continue = True
+        self.should_continue = False
         self.thread = threading.Thread(target=self.run, daemon=True)
 
     def run(self):
@@ -36,6 +36,7 @@ class Engine:
                 time.sleep(1)
 
     def start(self):
+        self.should_continue = True
         self.thread.start()
 
     def stop(self):
