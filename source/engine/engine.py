@@ -21,7 +21,7 @@ class Engine:
         train_labels = redis.Redis(db=2, **redis_kwargs)
 
         while self.should_continue:
-            for id_ in train_images.scan():
+            for id_ in train_images.scan()[1]:
                 label = train_labels.get(id_)
                 if label == None:
                     continue
