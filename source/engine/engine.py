@@ -60,7 +60,7 @@ class Engine:
         logits = K.sigmoid(nets)
         loss = keras.losses.binary_crossentropy(labels, logits)
 
-        assert mode == tf.estimator.ModeKey.TRAIN # pylint: disable=no-member
+        assert mode == tf.estimator.ModeKeys.TRAIN # pylint: disable=no-member
         optimizer = tf.train.AdamOptimizer()
         train_op = optimizer.minimize(loss, tf.train.get_or_create_global_step())
         return tf.estimator.EstimatorSpec( # pylint: disable=no-member
