@@ -1,7 +1,6 @@
 import unittest
 from concurrent import futures
 import uuid
-import time
 
 import grpc
 
@@ -55,17 +54,19 @@ class EngineServicerTestCase(unittest.TestCase):
         with grpc.insecure_channel('localhost:50051') as channel:
             stub = engine_pb2_grpc.EngineStub(channel)
             stub.GetTrainLogits(engine_pb2.ID())
-            for _ in range(3):
-                id_ = engine_pb2.ID(bytes=uuid.uuid4().bytes)
-                self.assertEqual(stub.PutTrainImage(image), id_)
-                self.assertEqual(stub.PutTrainLabel(label), id_)
-            
-            time.sleep(1)
 
     def test_engine(self):
         with grpc.insecure_channel('localhost:50051') as channel:
             stub = engine_pb2_grpc.EngineStub(channel)
-
-
+            stub.GetTrainLogits(engine_pb2.ID())
+            for _ in range(3):
+                id_ = engine_pb2.ID(bytes=uuid.uuid4().bytes)
+                image = engine_pb2.Image(id=id_)
+                label = engine_pb2.Label(id=id_)
+                stub.PutTrainImage(image)
+                stub.PutTrainLabel(label)
+            
+            time.sleep(1)
+        
 if __name__ == '__main__':
     unittest.main()
