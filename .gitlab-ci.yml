@@ -3,7 +3,6 @@ stages:
   - unit test
   - integration test
   - functional test
-  - push github
 
 build engine:
   stage: build
@@ -15,15 +14,6 @@ test engine:
   before_script:
     - docker run --rm -d --name redis -p 6379:6379 redis:latest
   script:
-    - docker run --rm -e REDIS_HOST=10.0.0.6 -e REDIS_PORT=6379 -v /mnt/D/dataset/VOC2006:/mnt/VOC2006 -v /mnt/keras:/root/.keras continous_learning/engine:nightly python engine/servicer_test.py
+    - docker run --rm -e REDIS_HOST=10.0.0.6 -e REDIS_PORT=6379 continous_learning/engine:nightly python engine/test.py
   after_script:
     - docker kill redis
-
-test mount:
-  stage: build
-  script:
-    - ls /mnt
-    - "ls /mnt/D"
-    - "ls /mnt/D/dataset"
-    - "ls /mnt/D/dataset/VOC2006"
-    - "ls /mnt/D/dataset/VOC2006/train"

@@ -11,7 +11,7 @@ import engine_pb2_grpc #pylint: disable=import-error
 from servicer import EngineServicer
 from engine import Engine
 
-class EngineServicerTestCase(unittest.TestCase):
+class unit_test(unittest.TestCase):
 
     def setUp(self):
         self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
@@ -56,17 +56,5 @@ class EngineServicerTestCase(unittest.TestCase):
             stub = engine_pb2_grpc.EngineStub(channel)
             stub.GetTrainLogits(engine_pb2.ID())
 
-    def test_engine(self):
-        with grpc.insecure_channel('localhost:50051') as channel:
-            stub = engine_pb2_grpc.EngineStub(channel)
-            id_ = stub.PutTrainImage(engine_pb2.Image(path='/mnt/VOC2006/train/PNGImages/000004.png'))
-            stub.PutTrainLabel(engine_pb2.Label(id=id_, one_hot_label=[0]*1000))
-            id_ = stub.PutTrainImage(engine_pb2.Image(path='/mnt/VOC2006/train/PNGImages/000006.png'))
-            stub.PutTrainLabel(engine_pb2.Label(id=id_, one_hot_label=[0]*1000))
-            id_ = stub.PutTrainImage(engine_pb2.Image(path='/mnt/VOC2006/train/PNGImages/000008.png'))
-            stub.PutTrainLabel(engine_pb2.Label(id=id_, one_hot_label=[0]*1000))
-            
-            time.sleep(3)
-        
 if __name__ == '__main__':
     unittest.main()
