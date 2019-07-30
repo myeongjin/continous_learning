@@ -1,9 +1,23 @@
 stages:
+  - clean up
   - build
   - unit test
   - functional test
+  - deploy
+
+clean up:
+  stage: clean up
+  script:
+    - docker-compose stop
+    - docker-compose rm -f
 
 build web:
   stage: build
   script:
     - docker build -t continous_learning/web:nightly -f docker/web.Dockerfile source
+
+deploy:
+  stage: deploy
+  script:
+    - docker-compose create
+    - docker-compose start
