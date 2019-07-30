@@ -7,10 +7,11 @@ stages:
 
 clean up:
   stage: clean up
+  before_script:
+    - docker build -t continous_learning/docker-compose:nightly -f docker/docker-compose.Dockerfile source
   script:
-    - ls
-    - docker-compose stop
-    - docker-compose rm -f
+    - docker run -rm -v /var/run/docker.sock:/var/run/docker.sock continous_learning/docker-compose:nightly stop
+    - docker run -rm -v /var/run/docker.sock:/var/run/docker.sock continous_learning/docker-compose:nightly rm -f
 
 build web:
   stage: build
@@ -20,5 +21,5 @@ build web:
 deploy:
   stage: deploy
   script:
-    - docker-compose create
-    - docker-compose start
+    - docker run -rm -v /var/run/docker.sock:/var/run/docker.sock continous_learning/docker-compose:nightly create
+    - docker run -rm -v /var/run/docker.sock:/var/run/docker.sock continous_learning/docker-compose:nightly start

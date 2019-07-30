@@ -5,3 +5,4 @@ services:
     image: continous_learning/web:nightly
     ports:
       - 3000:3000
+ 
