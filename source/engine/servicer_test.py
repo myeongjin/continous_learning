@@ -13,20 +13,6 @@ from engine import Engine
 
 class unit_test(unittest.TestCase):
 
-    def setUp(self):
-        self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
-        engine_pb2_grpc.add_EngineServicer_to_server(
-            EngineServicer(), self.server)
-        self.server.add_insecure_port('[::]:50051')
-        self.server.start()
-
-        self.engine = Engine()
-        self.engine.start()
-
-    def tearDown(self):
-        self.server.stop(0)
-        self.engine.stop()
-
     def test_train_image(self):
         id_ = engine_pb2.ID(bytes=uuid.uuid4().bytes)
         image = engine_pb2.Image(id=id_)

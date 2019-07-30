@@ -13,19 +13,17 @@ import engine_pb2 # pylint: disable=import-error
 
 class Engine:
 
-    def __init__(self, batch_size=8, steps=100):
+    def __init__(self, redis_host, redis_port, batch_size=8, steps=100):
+        self.redis_host = redis_host
+        self.redis_port = redis_port
         self.batch_size = batch_size
         self.steps = steps
         self.should_continue = False
         self.thread = threading.Thread(target=self.run, daemon=True)
 
-    def generator(self):
-        redis_kwargs = {
-            'host': os.environ['REDIS_HOST'],
-            'port': int(os.environ['REDIS_PORT']) if 'REDIS_PORT' in os.environ else 6379,
-        }
-        train_images = redis.Redis(db=1, **redis_kwargs)
-        train_labels = redis.Redis(db=2, **redis_kwargs)
+    def generator(self, redis_host, redis_port):
+        train_images = redis.Redis(db=1, host=self.redis_host, port=self.redis_port)
+        train_labels = redis.Redis(db=2, host=self.redis_host, port=self.redis_port)
 
         while True:
             for id_ in train_images.scan()[1]:
@@ -98,3 +96,15 @@ class Engine:
     def stop(self):
         self.should_continue = False
         self.thread.join()
+
+if __name__ == '__main__':
+    from concurrent import futures
+
+    from utils import mainloop, REDIS_HOST, REDIS_PORT # pylint: disable=no-name-in-module
+
+    engine = Engine(REDIS_HOST, REDIS_PORT)
+    engine.start()
+
+    mainloop()
+
+    engine.stop()
