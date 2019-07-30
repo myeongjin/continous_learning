@@ -1,7 +1,6 @@
 stages:
   - build
   - unit test
-  - integration test
   - functional test
 
 build web:
