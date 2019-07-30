@@ -4,17 +4,7 @@ stages:
   - integration test
   - functional test
 
-build engine:
+build web:
   stage: build
   script:
-    - docker build -t continous_learning/engine:nightly -f docker/engine.Dockerfile source
-
-test engine:
-  stage: unit test
-  before_script:
-    - docker run --rm -d --name redis -p 6379:6379 redis:latest
-    - docker run --rm -e REDIS_HOST=${DESKTOP_HOST} -e REDIS_PORT=6379 -p 50051:50051 continous_learning/engine:nightly python engine/servicer.py
-  script:
-    - docker run --rm -e SERVICER_HOST=${DESKTOP_HOST} -e SERVICER_PORT=50051 continous_learning/engine:nightly python engine/servicer_test.py
-  after_script:
-    - docker kill redis
+    - docker build -t continous_learning/web:nightly -f docker/web.Dockerfile source
